@@ -82,6 +82,7 @@ function draw() {
       bY + 50 >= 500 - logo.height
     ) {
       location.reload(); // reload the page
+      console.log("FINNNN");
     }
 
     if (pipe[i].x == 5) {
