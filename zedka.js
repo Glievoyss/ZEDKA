@@ -62,7 +62,7 @@ function draw() {
   for (let i = 0; i < pipe.length; i++) {
     constant = 242 + gap;
     ctx.drawImage(virusUp, pipe[i].x, pipe[i].y);
-    ctx.drawImage(virusDown, pipe[i].x, pipe[i].y + constant);
+    ctx.drawImage(virusDown, pipe[i].x, pipe[i].y + 362);
 
     pipe[i].x--;
 
@@ -75,14 +75,14 @@ function draw() {
 
     // detect collision
 
+    console.log(constant);
     if (
       (bX + 50 >= pipe[i].x &&
         bX <= pipe[i].x + 242 &&
         (bY <= pipe[i].y + 242 || bY + 50 >= pipe[i].y + constant)) ||
-      bY + 50 >= 500 - logo.height
+      bY + 50 >= 500 - 118
     ) {
       location.reload(); // reload the page
-      console.log("FINNNN");
     }
 
     if (pipe[i].x == 5) {
