@@ -1,11 +1,11 @@
-var cvs = document.getElementById("canvas");
-var ctx = cvs.getContext("2d");
+const cvs = document.getElementById("canvas");
+const ctx = cvs.getContext("2d");
 
-var zedka = new Image();
-var map = new Image();
-var logo = new Image();
-var virusUp = new Image();
-var virusDown = new Image();
+const zedka = new Image();
+const map = new Image();
+const logo = new Image();
+const virusUp = new Image();
+const virusDown = new Image();
 
 zedka.src = "images/zedka.png";
 map.src = "images/map.png";
@@ -14,19 +14,19 @@ virusUp.src = "images/virusUp.png";
 virusDown.src = "images/virusDown.png";
 
 let gap = 120;
-var constant;
+let constant;
 
-var bX = 10;
-var bY = 150;
+let bX = 10;
+let bY = 150;
 
-var gravity = 1.5;
+const gravity = 1.5;
 
-var score = 0;
+let score = 0;
 
 // audio files
 
-var fly = new Audio();
-var scor = new Audio();
+const fly = new Audio();
+const scor = new Audio();
 
 fly.src = "sounds/noch.mp3";
 scor.src = "sounds/ou.mp3";
@@ -36,7 +36,6 @@ scor.src = "sounds/ou.mp3";
 document.addEventListener("keydown", moveUp);
 
 function moveUp(e) {
-  console.log(e.code);
   if (e.code === "KeyH") {
     gap += 10;
   } else if (e.code === "KeyJ") {
@@ -48,10 +47,10 @@ function moveUp(e) {
 
 // pipe coordinates
 
-var pipe = [];
-
+let pipe = [];
+console.log(cvs.width);
 pipe[0] = {
-  x: cvs.width,
+  x: 300,
   y: 0,
 };
 
@@ -60,8 +59,8 @@ pipe[0] = {
 function draw() {
   ctx.drawImage(map, 0, 0);
 
-  for (var i = 0; i < pipe.length; i++) {
-    constant = virusUp.height + gap;
+  for (let i = 0; i < pipe.length; i++) {
+    constant = 242 + gap;
     ctx.drawImage(virusUp, pipe[i].x, pipe[i].y);
     ctx.drawImage(virusDown, pipe[i].x, pipe[i].y + constant);
 
@@ -70,18 +69,17 @@ function draw() {
     if (pipe[i].x == 125) {
       pipe.push({
         x: cvs.width,
-        y: Math.floor(Math.random() * virusUp.height) - virusUp.height,
+        y: Math.floor(Math.random() * 242) - 242,
       });
     }
 
     // detect collision
 
     if (
-      (bX + zedka.width >= pipe[i].x &&
-        bX <= pipe[i].x + virusUp.width &&
-        (bY <= pipe[i].y + virusUp.height ||
-          bY + zedka.height >= pipe[i].y + constant)) ||
-      bY + zedka.height >= cvs.height - logo.height
+      (bX + 50 >= pipe[i].x &&
+        bX <= pipe[i].x + 242 &&
+        (bY <= pipe[i].y + 242 || bY + 50 >= pipe[i].y + constant)) ||
+      bY + 50 >= 500 - logo.height
     ) {
       location.reload(); // reload the page
     }
