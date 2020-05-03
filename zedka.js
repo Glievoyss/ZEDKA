@@ -75,7 +75,7 @@ function draw() {
 
     // detect collision
 
-    console.log(constant);
+    console.log(pipe[i].x);
     if (
       (bX + 50 >= pipe[i].x &&
         bX <= pipe[i].x + 242 &&
