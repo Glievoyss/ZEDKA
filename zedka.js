@@ -13,7 +13,7 @@ logo.src = "images/logo.png";
 virusUp.src = "images/virusUp.png";
 virusDown.src = "images/virusDown.png";
 
-let gap = 120;
+let gap = 160;
 let constant;
 
 let bX = 10;
@@ -22,15 +22,20 @@ let bY = 150;
 const gravity = 1.5;
 
 let score = 0;
+let record = 0;
 
 const fly = new Audio();
 const scor = new Audio();
+const smeh = new Audio();
 
 fly.src = "sounds/noch.mp3";
 scor.src = "sounds/ou.mp3";
+smeh.scr = "sounds/ou2.mp3";
 fly.play();
 
 document.addEventListener("keydown", moveUp);
+document.addEventListener("touchstart", moveUpMouse);
+document.addEventListener("touchmove", moveUpMouse);
 
 function moveUp(e) {
   if (e.code === "KeyH") {
@@ -39,6 +44,15 @@ function moveUp(e) {
     gap -= 10;
   }
   bY -= 25;
+}
+
+function moveUpMouse(e) {
+  if (e.code === "KeyH") {
+    gap += 10;
+  } else if (e.code === "KeyJ") {
+    gap -= 10;
+  }
+  bY -= 7;
 }
 
 let pipe = [];
@@ -73,6 +87,7 @@ function draw() {
       bY + zedka.height >= cvs.height - logo.height
     ) {
       scor.play();
+      score > record ? (record = score) : (record = record);
       score = 0;
       bX = 10;
       bY = 150;
@@ -86,6 +101,7 @@ function draw() {
 
     if (pipe[i].x == 5) {
       score++;
+      smeh.play();
     }
   }
 
@@ -97,7 +113,9 @@ function draw() {
 
   ctx.fillStyle = "#000";
   ctx.font = "20px Verdana";
-  ctx.fillText("Score : " + score, 10, cvs.height - 20);
+  ctx.fillText("Балы : " + score, 10, cvs.height - 70);
+  ctx.fillStyle = "#ffffff";
+  ctx.fillText("Рекорд : " + record, 10, cvs.height - 30);
 
   requestAnimationFrame(draw);
 }
